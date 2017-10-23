@@ -156,7 +156,7 @@ var Tutorial = {
     createDimmer: () => {
         $(document).ready(()=>{
             if($('.custom_dimmer')[0] == undefined) {
-                let element = '<div style="background: #000; opacity: 0; height: 100%; width: 100%; z-index: 999; top: -100%; position: fixed; overflow: hidden;" class="custom_dimmer"></div>';
+                let element = '<div style="margin: 0px; padding: 0px; background: #000; opacity: 0; height: 100%; width: 100%; z-index: 999; top: -100%; position: fixed; overflow: hidden;" class="custom_dimmer"></div>';
                 $("body").append(element);
             }
         });
