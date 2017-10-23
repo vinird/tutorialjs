@@ -1,25 +1,35 @@
 var Tutorial = {
     // GLOBALS
-    selector, // CSS class selector
-    tutorialCount, // Init the tutorial popups steps count
-    endIndex: null, // The final point of index
-    onlyOnce, // It is used to evaluate if the tutorial only runs onces
-    styles: null, // It is used to evaluate if the tutorial only runs onces
+    selector: '.tutorial', // Jquery selector
+    startIndex: -999,
+    tutorialCount: -999, // Init the tutorial popups steps count
+    endIndex: 999, // The final point of index
+    onlyOnce: false, // It is used to evaluate if the tutorial only runs onces
+    styles: true, // It is used to evaluate if the tutorial only runs onces
     resolve: null, // Promise success callback
     reject:  null, // Promise error callbacks
+    btnFinish:  'Terminar', // Finish button text
+    btnNext:  'Siguiente', // Next button text
 
-    start: (_selector, _startIndex = 0, _endIndex = 999, _styles = false, _onlyOnce = false) => 
+    /*
+    * @return boolean
+    *
+    * Validate if the start index is correct
+    */
+    // selector, startIndex = 0, endIndex = 999, styles = false, onlyOnce = false
+    init: () => 
     {
-        Tutorial.styles          = _styles;
-        Tutorial.selector        = _selector; // JQuery selector
-        Tutorial.tutorialCount   = _startIndex; // Initialize the tutorial count every time
-        Tutorial.endIndex        = _endIndex; // Set the last index
-        Tutorial.onlyOnce        = _onlyOnce;
+        Tutorial.tutorialCount = Tutorial.startIndex;
+        // Tutorial.styles          = styles;
+        // Tutorial.selector        = selector; // JQuery selector
+        // Tutorial.tutorialCount   = startIndex; // Initialize the tutorial count every time
+        // Tutorial.endIndex        = endIndex; // Set the last index
+        // Tutorial.onlyOnce        = onlyOnce;
         return new Promise((resolve, reject) => 
             {
                 Tutorial.resolve = resolve;
                 Tutorial.reject  = reject;
-                if(!Tutorial.checkOnlyOnce(_onlyOnce)) {
+                if(!Tutorial.checkOnlyOnce(onlyOnce) && Tutorial.validateStart()) {
                     Tutorial.createDimmer();
                     Tutorial.initialAnimation();
                 }
@@ -27,9 +37,29 @@ var Tutorial = {
         )
     },
 
-    checkOnlyOnce: (_onlyOnce) => {
+    /*
+    * @return boolean
+    *
+    * Validate if the start index is correct
+    */
+    validateStart: () => {
+        if($( Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']')[0] == undefined) {
+            Tutorial.reject('Incorrect start index');
+            return false
+        } 
+        return true 
+    },
+
+    /*
+    * @param onlyOnce:boolean
+    *
+    * @return boolean
+    *
+    * Check if the tutorial should runs only one time
+    */
+    checkOnlyOnce: (onlyOnce) => {
         let path = 'Tutorial-route-' + window.location.pathname;
-        if(_onlyOnce) {
+        if(onlyOnce) {
             let check = Tutorial.checkCookie(path)
             if (check) {
                 Tutorial.resolve('outOfIndex');
@@ -47,9 +77,11 @@ var Tutorial = {
     * Init first animation and trigger the firts popup
     */
     initialAnimation: () => {
+        let vh = document.documentElement.clientHeight;
+        vh = vh / 3;
         $("body").animate(
             { 
-                scrollTop: $( Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']').offset().top / 2
+                scrollTop: $( Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']').offset().top - vh
             }, 
             "slow", 
             ()=>{
@@ -63,7 +95,7 @@ var Tutorial = {
     */
     triggerTutorialPopups: () => {
         Tutorial.showDimmer() // Shows the background dimmer
-        Tutorial.checkEndindex();
+        Tutorial.checkEndIndex();
         Tutorial.checkStyles();
         if($(Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']')[0] != undefined) { // If the tutorial step is not undefined
             $(Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']')
@@ -88,7 +120,7 @@ var Tutorial = {
     /*
     * Check if the index meet the endIndex
     */
-    checkEndindex: () => {
+    checkEndIndex: () => {
         if(Tutorial.endIndex == Tutorial.tutorialCount) {
             Tutorial.sanitizeZindex();
             Tutorial.tutorialCount = -999;
@@ -145,8 +177,8 @@ var Tutorial = {
         return ''+ // Returns the HTML
             '<strong>' + title + '</strong>'+
             '<p> ' + text + '</p>'+
-            '<button class="ui button tiny basic" tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" count="'+count+'" onclick="Tutorial.finishTutorial(this)">Terminar</button>'+
-            '<button tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" class="ui button tiny primary" onclick="Tutorial.closePopup(this, '+count+')">Siguiente</button>';
+            '<button class="ui button tiny basic" tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" count="'+count+'" onclick="Tutorial.finishTutorial(this)">'+Tutorial.btnFinish+'</button>'+
+            '<button tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" class="ui button tiny primary" onclick="Tutorial.closePopup(this, '+count+')">'+Tutorial.btnNext+'</button>';
     },
 
     /*
@@ -188,7 +220,10 @@ var Tutorial = {
     * Calculate the top position of the element given 
     */
     calcPopUpPosition: (element) => {
-        return (element.offset().top / 2);
+        let vh = document.documentElement.clientHeight;
+        vh = vh / 3;
+        let position = element.offset().top;
+        return position - vh;
     },
 
     /*
