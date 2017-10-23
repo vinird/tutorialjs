@@ -6,6 +6,8 @@ var Tutorial = {
     endIndex: 999, // The final point of index
     onlyOnce: false, // It is used to evaluate if the tutorial only runs onces
     styles: true, // It is used to evaluate if the tutorial only runs onces
+    bodyScroll: false,
+    scrollSelector: null,
     resolve: null, // Promise success callback
     reject:  null, // Promise error callbacks
     btnFinish:  'Terminar', // Finish button text
@@ -20,6 +22,11 @@ var Tutorial = {
     init: () => 
     {
         Tutorial.tutorialCount = Tutorial.startIndex;
+        if(Tutorial.bodyScroll) {
+            Tutorial.scrollSelector = 'body';
+        } else {
+            Tutorial.scrollSelector = 'html';            
+        }
         // Tutorial.styles          = styles;
         // Tutorial.selector        = selector; // JQuery selector
         // Tutorial.tutorialCount   = startIndex; // Initialize the tutorial count every time
@@ -79,7 +86,7 @@ var Tutorial = {
     initialAnimation: () => {
         let vh = document.documentElement.clientHeight;
         vh = vh / 3;
-        $("body").animate(
+        $(Tutorial.scrollSelector).animate(
             { 
                 scrollTop: $( Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']').offset().top - vh
             }, 
@@ -204,7 +211,7 @@ var Tutorial = {
         if($(Tutorial.selector +'[ tutorial-index='+(count + 1)+']').offset() != undefined) {
             let element = $(Tutorial.selector +'[ tutorial-index='+(count + 1)+']');
             let scroll = Tutorial.calcPopUpPosition(element);
-            $("body").animate({ scrollTop: parseInt(scroll) }, "slow", ()=>{
+            $(Tutorial.scrollSelector).animate({ scrollTop: parseInt(scroll) }, "slow", ()=>{
                 $(oldPopup).popup('hide')
             });
         } else {
