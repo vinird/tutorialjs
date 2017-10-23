@@ -29,7 +29,7 @@ var Tutorial = {
             {
                 Tutorial.resolve = resolve;
                 Tutorial.reject  = reject;
-                if(!Tutorial.checkOnlyOnce(onlyOnce) && Tutorial.validateStart()) {
+                if(!Tutorial.checkOnlyOnce(Tutorial.onlyOnce) && Tutorial.validateStart()) {
                     Tutorial.createDimmer();
                     Tutorial.initialAnimation();
                 }
