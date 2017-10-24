@@ -1,27 +1,40 @@
 var Tutorial = {
     // GLOBALS
     selector: '.tutorial', // Jquery selector
-    startIndex: -999,
-    tutorialCount: -999, // Init the tutorial popups steps count
+    startIndex: 0, // Start point
     endIndex: 999, // The final point of index
-    onlyOnce: false, // It is used to evaluate if the tutorial only runs onces
-    styles: true, // It is used to evaluate if the tutorial only runs onces
-    bodyScroll: false,
-    scrollSelector: null,
+    onlyOnce: false, // It is used to evaluate if the tutorial only runs onces (it uses cookies)
+    styles: true, // It adds custom styles to the each container
+    bodyScroll: false, // Defines if the body tag is used to scroll. If false it will use html tag
     resolve: null, // Promise success callback
     reject:  null, // Promise error callbacks
-    btnFinish:  'Terminar', // Finish button text
-    btnNext:  'Siguiente', // Next button text
+    removeAnimationConflicts: false,
+
+    btnFramework: 'semantic', // Set which framework is used to give styles to buttons
+
+    btnFinishText: 'Terminar', // Finish button text
+    btnFinishClass: 'ui button tiny basic', // Finish button CSS class
+
+    btnNextText: 'Siguiente', // Next button text
+    btnNextClass: 'ui button tiny primary', // Next button CSS class
+
+
+    
+    // Do not override!
+    tutorialCount: -999, // Init the tutorial popups steps count
+    scrollSelector: null, // Jquery scroll selector (body or html)
 
     /*
     * @return boolean
     *
     * Validate if the start index is correct
     */
-    // selector, startIndex = 0, endIndex = 999, styles = false, onlyOnce = false
-    init: () => 
+    start: () => 
     {
         Tutorial.tutorialCount = Tutorial.startIndex;
+        if(Tutorial.removeAnimationConflicts) {
+            $('.animated').css('animation', 'unset'); // Remove animate animations of elements to avoid conflicts in the stack context of the HTML
+        }
         if(Tutorial.bodyScroll) {
             Tutorial.scrollSelector = 'body';
         } else {
@@ -37,11 +50,30 @@ var Tutorial = {
                 Tutorial.resolve = resolve;
                 Tutorial.reject  = reject;
                 if(!Tutorial.checkOnlyOnce(Tutorial.onlyOnce) && Tutorial.validateStart()) {
+                    Tutorial.checkBtnClass()
                     Tutorial.createDimmer();
                     Tutorial.initialAnimation();
                 }
             }
         )
+    },
+
+    /*
+    * Set CSS classes to the buttons
+    */
+    checkBtnClass: () => {
+        if(Tutorial.btnFramework == 'custom') {
+            // Custom styles for buttons
+        } else if(Tutorial.btnFramework == 'bootstrap') {
+            Tutorial.btnFinishClass = 'btn btn-sm btn-default';
+            Tutorial.btnNextClass = 'btn btn-sm btn-primary';
+        } else if(Tutorial.btnFramework == 'materialize') {
+            Tutorial.btnFinishClass = 'waves-effect btn';
+            Tutorial.btnNextClass = 'waves-effect waves-light btn';
+        } else {
+            Tutorial.btnFinishClass = 'ui button tiny basic';
+            Tutorial.btnNextClass = 'ui button tiny primary';
+        }
     },
 
     /*
@@ -118,10 +150,9 @@ var Tutorial = {
             $(Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']').popup('show'); // Shows the popup
         } else {
             Tutorial.hideDimmer(); // Hides the background dimmer
-            Tutorial.resolve("finished");
-            // swal('', 'Tutorial completado') // When the tutorial is completed
+            Tutorial.resolve("finished"); // Promise success
         }
-        Tutorial.tutorialCount++; // This is added to .tutorial class in order to find them
+        Tutorial.tutorialCount++; // Increase global turorial iteration
     },
 
     /*
@@ -131,7 +162,7 @@ var Tutorial = {
         if(Tutorial.endIndex == Tutorial.tutorialCount) {
             Tutorial.sanitizeZindex();
             Tutorial.tutorialCount = -999;
-            Tutorial.resolve("endIndex");
+            Tutorial.resolve("endIndex"); // Promise success
             Tutorial.hideDimmer();
             $(Tutorial.selector +'[ tutorial-index='+Tutorial.tutorialCount+']').popup('hide');
         }
@@ -162,9 +193,9 @@ var Tutorial = {
     */
     createDimmer: () => {
         $(document).ready(()=>{
-            if($('.custom_dimmer')[0] == undefined) {
-                let element = '<div style="margin: 0px; padding: 0px; background: #000; opacity: 0; height: 100%; width: 100%; z-index: 999; top: -100%; position: fixed; overflow: hidden;" class="custom_dimmer"></div>';
-                $("body").append(element);
+            if($('.tutorial_dimmer')[0] == undefined) {
+                let element = '<div style="margin: 0px; padding: 0px; background: #000; opacity: 0; height: 100%; width: 100%; z-index: 999; top: -100%; position: fixed; overflow: hidden;" class="tutorial_dimmer"></div>';
+                $("html").append(element);
             }
         });
     },
@@ -178,14 +209,13 @@ var Tutorial = {
     */
     renderHtmlTutorial: (count) => {
         Tutorial.sanitizeZindex();
-        let title = $(Tutorial.selector +'[ tutorial-index='+count+']').attr('tutorial-title') // Title
-        let text = $(Tutorial.selector +'[ tutorial-index='+count+']').attr('tutorial-text') // Body text
-        $('.animated').css('animation', 'unset'); // Remove animations of elements to avoid conflicts in the stack context of the HTML
-        return ''+ // Returns the HTML
+        let title = $(Tutorial.selector +'[ tutorial-index='+count+']').attr('tutorial-title') // Popup title
+        let text = $(Tutorial.selector +'[ tutorial-index='+count+']').attr('tutorial-text') // Popup body text
+        return ''+ // Returns the popup HTML
             '<strong>' + title + '</strong>'+
             '<p> ' + text + '</p>'+
-            '<button class="ui button tiny basic" tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" count="'+count+'" onclick="Tutorial.finishTutorial(this)">'+Tutorial.btnFinish+'</button>'+
-            '<button tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" class="ui button tiny primary" onclick="Tutorial.closePopup(this, '+count+')">'+Tutorial.btnNext+'</button>';
+            '<button class="'+Tutorial.btnFinishClass+'" tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" count="'+count+'" onclick="Tutorial.finishTutorial(this)">'+Tutorial.btnFinishText+'</button>'+
+            '<button tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" class="'+Tutorial.btnNextClass+'" onclick="Tutorial.closePopup(this, '+count+')">'+Tutorial.btnNextText+'</button>';
     },
 
     /*
@@ -239,7 +269,7 @@ var Tutorial = {
     * Finish tutorials and resolve the Promise with 'cancelled' message
     */
     finishTutorial: (element) => {
-        Tutorial.resolve('cancelled')
+        Tutorial.resolve('cancelled') // Promise success
         let popupName = $(element).attr('tutotrial-val');
         $(popupName).popup('hide')
         Tutorial.sanitizeZindex(true);
@@ -250,16 +280,16 @@ var Tutorial = {
     * Shows custom dimmer
     */
     showDimmer: () => {
-        $('.custom_dimmer').css('top','0');
-        $('.custom_dimmer').animate({opacity: 0.4});
+        $('.tutorial_dimmer').css('top','0');
+        $('.tutorial_dimmer').animate({opacity: 0.4});
     },
 
     /*
     * Hides custom dimmer
     */
     hideDimmer: () => {
-        $('.custom_dimmer').animate({opacity: 0},()=>{
-            $('.custom_dimmer').css('top','-100%');
+        $('.tutorial_dimmer').animate({opacity: 0},()=>{
+            $('.tutorial_dimmer').css('top','-100%');
         });
     },
 
