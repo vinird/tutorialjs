@@ -1,19 +1,27 @@
+<p align="center"> 
+<img src="https://i.imgur.com/7C8p34p.png">
+</p>
+
+
+
+
 # Tutorialjs ![status alpha](https://img.shields.io/badge/status-alpha-yellow.svg)
 
-Tutorialjs is a library to do website tutorials using popups.
+Tutorialjs is a library to do a websites tutorial using popups.
 
-It helps new users to get into a new application, showing step by step on how to use all the components of the particular application. 
+It helps new user to get into a new application, showing step by step how to use all the components. 
 
-This library is based on [Semantic UI elements](https://semantic-ui.com/) and it uses [Semantic UI popups](https://semantic-ui.com/modules/popup.html).
+This library is base on [Semantic UI elements](https://semantic-ui.com/) and it uses [Semantic UI popups](https://semantic-ui.com/modules/popup.html).
 
 
 
 ## How to contribute
 
-***This project is in alpha version (0.1.0).**
+***This project is alpha version (0.1.0).**
 
-You can contribute following the contribution guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
-Also check [issues](https://github.com/vinird/tutorialjs/issues) to start contributing to this project.
+You can help following the [CONTRIBUTING.md](CONTRIBUTING.md) guidelines.
+
+Also check the [issues](https://github.com/vinird/tutorialjs/issues).
 
 
 
@@ -21,11 +29,11 @@ Also check [issues](https://github.com/vinird/tutorialjs/issues) to start contri
 
 **JQuery**
 
-The main dependency is JQuery, it also use Semantic UI styles and scripts but those are included in this repository.
+It main dependency is JQuery, it also uses Semantic UI styles and scripts but those are included in this repository.
 
 
 
-## How to use tutorialjs
+## How to use it
 
 Add Semantic UI CSS components
 
@@ -59,7 +67,7 @@ If you want to use Semantic UI button styles you can add the following:
 
 ### HTML
 
-In order to link html tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
+In order to link HTML tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also, you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
 
 ```html
 <div class="tutorial" tutorial-index="0">
@@ -67,7 +75,7 @@ In order to link html tags with Tutorialjs you must add a **``tutorial``** class
 </div>
 ```
 
-By default the **start index is 0**.
+By default, the **start index is 0**.
 
 To set a title and text to the popup you have to add a two more custom attributes:
 
@@ -121,7 +129,7 @@ Tutorialjs runs the **`start`** function as a **async promise** so you must use 
 |  **finished**  | When the tutorial finish.                |
 |  **canceled**  | When the tutorial is canceled.           |
 | **outOfIndex** | When the tutorial meets **endIndex** option. |
-|  **onlyOnce**  | When the tutorial has runs and it has the **onlyOnce** option set to ``true``. |
+|  **onlyOnce**  | When the tutorial has run and it has the **onlyOnce** option set to ``true``. |
 
 
 
@@ -135,7 +143,7 @@ Tutorialjs runs the **`start`** function as a **async promise** so you must use 
 
 ## Options
 
-The correct way to set options is to assign them before you trigger the **``start``** function, here an example:
+The correct way to set options is assign then before you trigger the **``start``** function, here an example:
 
 ```javascript
 Tutorial.startIndex = 0;
@@ -171,4 +179,4 @@ Tutorial.start().then((success) => {
 
 ## License ![MIT](https://img.shields.io/apm/l/vim-mode.svg)
 
-The Tutorialjs library is an open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT).
+The Tutorialj library is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT).
