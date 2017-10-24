@@ -30,8 +30,8 @@ The main dependency is JQuery, it also use Semantic UI styles and scripts but th
 Add Semantic UI CSS components
 
 ```html
-<link rel="stylesheet" href="tutorial/semantic_components/popup.min.css">
-<link rel="stylesheet" href="tutorial/semantic_components/transition.min.css">
+<link rel="stylesheet" href="tutorial/semantic_components/popup.min.CSS">
+<link rel="stylesheet" href="tutorial/semantic_components/transition.min.CSS">
 ```
 
 Add Semantic UI Scripts
@@ -52,14 +52,14 @@ Include **Tutorialjs** script
 If you want to use Semantic UI button styles you can add the following:
 
 ```html
-<link rel="stylesheet" href="tutorial/semantic_components/button.min.css">
+<link rel="stylesheet" href="tutorial/semantic_components/button.min.CSS">
 ```
 
 
 
 ### HTML
 
-In order to link html tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
+In order to link html tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also, you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
 
 ```html
 <div class="tutorial" tutorial-index="0">
@@ -69,7 +69,7 @@ In order to link html tags with Tutorialjs you must add a **``tutorial``** class
 
 By default the **start index is 0**.
 
-To set a title and text to the popup you have to add a two more custom attributes:
+To set a title and text to the popup you have to add two more custom attributes:
 
 **``tutorial-title="title"``**
 
@@ -160,8 +160,8 @@ Tutorial.start().then((success) => {
 |         **onlyOnce**         |              `true` `false`              | It uses the current URL to determinate if the tutorial was already ran. And sets cookies to evaluate it next time it runs. |           `false`           |
 |          **styles**          |              `true` `false`              | Applies custom styles to the container of each step. |          ``true``           |
 |        **bodyScroll**        |              `true` `false`              | If true it uses `"body"` tag to scroll otherwise it uses `"html"` tag. |          ``false``          |
-| **removeAnimationConflicts** |              `true` `false`              | If true it overrides `".animated"` class with css ``animation: unset``. This helpful if you are using Animate.css. |          ``false``          |
-|       **btnFramework**       | `"semantic"` `"bootstrap"` `"materialize"` ``"custom"`` | Set the css framework for styling the buttons. If you use ``"custom"`` you must set ``btnFinishClass`` and  ``btnNextClass``. |       ``"semantic"``        |
+| **removeAnimationConflicts** |              `true` `false`              | If true it overrides `".animated"` class with CSS ``animation: unset``. This helpful if you are using Animate.CSS. |          ``false``          |
+|       **btnFramework**       | `"semantic"` `"bootstrap"` `"materialize"` ``"custom"`` | Set the CSS framework for styling the buttons. If you use ``"custom"`` you must set ``btnFinishClass`` and  ``btnNextClass``. |       ``"semantic"``        |
 |      **btnFinishText**       |                 `string`                 | Set the text for the finish button.      |        ``"Cancel"``         |
 |      **btnFinishClass**      |                 `string`                 | Set the custom classes for the finish button. | ``"ui button tiny basic"``  |
 |       **btnNextText**        |                 `string`                 | Set the text for the next button.        |         ``"Next"``          |
