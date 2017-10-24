@@ -1,6 +1,6 @@
 # Tutorialjs ![status alpha](https://img.shields.io/badge/status-alpha-yellow.svg)
 
-Tutorialjs is a library to do websides tutorial using popups.
+Tutorialjs is a library to do a websites tutorial using popups.
 
 It helps new user to get into a new application, showing step by step how to use all the components. 
 
@@ -22,7 +22,7 @@ Also check the [issues](https://github.com/vinird/tutorialjs/issues).
 
 **JQuery**
 
-It main dependency is JQuery, it also use Semantic UI styles and scripts but those are include in this repository.
+It main dependency is JQuery, it also uses Semantic UI styles and scripts but those are included in this repository.
 
 
 
@@ -60,7 +60,7 @@ If you want to use Semantic UI button styles you can add the following:
 
 ### HTML
 
-In order to link html tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
+In order to link HTML tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also, you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
 
 ```html
 <div class="tutorial" tutorial-index="0">
@@ -68,7 +68,7 @@ In order to link html tags with Tutorialjs you must add a **``tutorial``** class
 </div>
 ```
 
-By default the **start index is 0**.
+By default, the **start index is 0**.
 
 To set a title and text to the popup you have to add a two more custom attributes:
 
@@ -122,7 +122,7 @@ Tutorialjs runs the **`start`** function as a **async promise** so you must use 
 |  **finished**  | When the tutorial finish.                |
 |  **canceled**  | When the tutorial is canceled.           |
 | **outOfIndex** | When the tutorial meets **endIndex** option. |
-|  **onlyOnce**  | When the tutorial has runs and it has the **onlyOnce** option set to ``true``. |
+|  **onlyOnce**  | When the tutorial has run and it has the **onlyOnce** option set to ``true``. |
 
 
 
@@ -172,4 +172,4 @@ Tutorial.start().then((success) => {
 
 ## License ![MIT](https://img.shields.io/apm/l/vim-mode.svg)
 
-The Tutorialjs library is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT).
+The Tutorialj library is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT).
