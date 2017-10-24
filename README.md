@@ -1,6 +1,6 @@
 # Tutorialjs ![status alpha](https://img.shields.io/badge/status-alpha-yellow.svg)
 
-![alt text](assets/images/logo/tutorialjs-logo.png "TutorialJS")
+<p align="center"><img src="assets/images/logo/tutorialjs-logo.png"></p>
 
 
 Tutorialjs is a library to do website tutorials using popups.
