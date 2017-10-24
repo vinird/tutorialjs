@@ -60,7 +60,7 @@ If you want to use Semantic UI button styles you can add the following:
 
 ### HTML
 
-In order to link html tags with Tutorialjs you must add a **tutorial** class to each tag you want to have a step tutorial. Also you need to include a custom property to define the index of the step; **tutorial-index="index:int"**.
+In order to link html tags with Tutorialjs you must add a **``tutorial``** class to each tag you want to have a step tutorial. Also you need to include a custom property to define the index of the step; **``tutorial-index="index:int"``**.
 
 ```html
 <div class="tutorial" tutorial-index="0">
@@ -72,9 +72,9 @@ By default the **start index is 0**.
 
 To set a title and text to the popup you have to add a two more custom attributes:
 
-**tutorial-title="title"**
+**``tutorial-title="title"``**
 
-**tutorial-text="text"**
+**``tutorial-text="text"``**
 
 ```html
 <div class="tutorial" tutorial-index="0" tutorial-title="My title" tutorial-text="My text">
@@ -101,7 +101,7 @@ The following is a tutorial with three index steps:
 
 ### Javascript
 
-Once you have setup the HTML you are ready to run the tutorial. The simplest way to do it is using the **start** function of the **Tutorial** object, as follow:
+Once you have setup the HTML you are ready to run the tutorial. The simplest way to do it is using the **``start``** function of the **Tutorial** object, as follow:
 
 ```javascript
 Tutorial.start().then((success) => {
@@ -111,7 +111,7 @@ Tutorial.start().then((success) => {
 })
 ```
 
-Tutorialjs runs the `start` function as a **async promise** so you must use `then` and `catch` to way for the response.
+Tutorialjs runs the **`start`** function as a **async promise** so you must use **`then`** and **`catch`** to way for the response.
 
 
 
@@ -136,7 +136,7 @@ Tutorialjs runs the `start` function as a **async promise** so you must use `the
 
 ## Options
 
-The correct way to set options is assign then before you trigger the **start** function, here an example:
+The correct way to set options is assign then before you trigger the **``start``** function, here an example:
 
 ```javascript
 Tutorial.startIndex = 0;
