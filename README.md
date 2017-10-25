@@ -4,11 +4,11 @@
 
 ![Watch the gif](assets/example/example.gif)
 
-Tutorialjs is a library to do website tutorials using popups.
+TutorialJS is a better way to introduce your application or new features of an existing application.
 
-It helps new users to get into a new application, showing step by step on how to use all the components of the particular application. 
+It shows new users a step-by-step guide on how to use the various components of your project.
 
-This library is based on [Semantic UI elements](https://semantic-ui.com/) and it uses [Semantic UI popups](https://semantic-ui.com/modules/popup.html).
+This library is based on [Semantic UI elements](https://semantic-ui.com/) and uses [Semantic UI popups](https://semantic-ui.com/modules/popup.html).
 
 
 
@@ -120,19 +120,19 @@ Tutorialjs runs the **`start`** function as a **async promise** so you must use 
 
 #### Success response:
 
-|     Value      |                                          |
-| :------------: | ---------------------------------------- |
-|  **finished**  | When the tutorial finish.                |
-|  **canceled**  | When the tutorial is canceled.           |
-| **outOfIndex** | When the tutorial meets **endIndex** option. |
-|  **onlyOnce**  | When the tutorial has runs and it has the **onlyOnce** option set to ``true``. |
+| Value          |                                                                                |
+| :------------: | ------------------------------------------------------------------------------ |
+| **finished**   | When the tutorial finish.                                                      |
+| **canceled**   | When the tutorial is canceled.                                                 |
+| **outOfIndex** | When the tutorial meets **endIndex** option.                                   |
+| **onlyOnce**   | When the tutorial has runs and it has the **onlyOnce** option set to ``true``. |
 
 
 
 #### Error response:
 
-|           Value           |                                          |
-| :-----------------------: | ---------------------------------------- |
+| Value                     |                                                                                                    |
+| :-----------------------: | -------------------------------------------------------------------------------------------------- |
 | **Incorrect start index** | When the **startIndex** is not correct. Or **tutorial-index=""** is different than **startIndex**. |
 
 
@@ -156,20 +156,20 @@ Tutorial.start().then((success) => {
 
 #### Options available
 
-|             Name             |             Accepted values              | Description                              |           Default           |
-| :--------------------------: | :--------------------------------------: | :--------------------------------------- | :-------------------------: |
-|        **startIndex**        |                  `int`                   | Start index point.                       |              0              |
-|         **endIndex**         |                  `int`                   | End index point.                         |             999             |
-|         **selector**         |             JQuery selector              | Selector, example:  `".className"` `".intro,.demo"`  `"[href='default.htm']"`. |        `".tutorial"`        |
-|         **onlyOnce**         |              `true` `false`              | It uses the current URL to determinate if the tutorial was already ran. And sets cookies to evaluate it next time it runs. |           `false`           |
-|          **styles**          |              `true` `false`              | Applies custom styles to the container of each step. |          ``true``           |
-|        **bodyScroll**        |              `true` `false`              | If true it uses `"body"` tag to scroll otherwise it uses `"html"` tag. |          ``false``          |
-| **removeAnimationConflicts** |              `true` `false`              | If true it overrides `".animated"` class with CSS ``animation: unset``. This helpful if you are using Animate.CSS. |          ``false``          |
-|       **btnFramework**       | `"semantic"` `"bootstrap"` `"materialize"` ``"custom"`` | Set the CSS framework for styling the buttons. If you use ``"custom"`` you must set ``btnFinishClass`` and  ``btnNextClass``. |       ``"semantic"``        |
-|      **btnFinishText**       |                 `string`                 | Set the text for the finish button.      |        ``"Cancel"``         |
-|      **btnFinishClass**      |                 `string`                 | Set the custom classes for the finish button. | ``"ui button tiny basic"``  |
-|       **btnNextText**        |                 `string`                 | Set the text for the next button.        |         ``"Next"``          |
-|       **btnNextClass**       |                 `string`                 | Set the custom classes for the next button. | ``"ui button tiny primary`` |
+| Name                         | Accepted values                                         | Description                                                                                                                   | Default                     |
+| :--------------------------: | :-----------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------- | :-------------------------: |
+| **startIndex**               | `int`                                                   | Start index point.                                                                                                            | 0                           |
+| **endIndex**                 | `int`                                                   | End index point.                                                                                                              | 999                         |
+| **selector**                 | JQuery selector                                         | Selector, example:  `".className"` `".intro,.demo"`  `"[href='default.htm']"`.                                                | `".tutorial"`               |
+| **onlyOnce**                 | `true` `false`                                          | It uses the current URL to determinate if the tutorial was already ran. And sets cookies to evaluate it next time it runs.    | `false`                     |
+| **styles**                   | `true` `false`                                          | Applies custom styles to the container of each step.                                                                          | ``true``                    |
+| **bodyScroll**               | `true` `false`                                          | If true it uses `"body"` tag to scroll otherwise it uses `"html"` tag.                                                        | ``false``                   |
+| **removeAnimationConflicts** | `true` `false`                                          | If true it overrides `".animated"` class with CSS ``animation: unset``. This helpful if you are using Animate.CSS.            | ``false``                   |
+| **btnFramework**             | `"semantic"` `"bootstrap"` `"materialize"` ``"custom"`` | Set the CSS framework for styling the buttons. If you use ``"custom"`` you must set ``btnFinishClass`` and  ``btnNextClass``. | ``"semantic"``              |
+| **btnFinishText**            | `string`                                                | Set the text for the finish button.                                                                                           | ``"Cancel"``                |
+| **btnFinishClass**           | `string`                                                | Set the custom classes for the finish button.                                                                                 | ``"ui button tiny basic"``  |
+| **btnNextText**              | `string`                                                | Set the text for the next button.                                                                                             | ``"Next"``                  |
+| **btnNextClass**             | `string`                                                | Set the custom classes for the next button.                                                                                   | ``"ui button tiny primary`` |
 
 
 
