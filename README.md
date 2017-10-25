@@ -32,21 +32,21 @@ The main dependency is JQuery, it also use Semantic UI styles and scripts but th
 Add Semantic UI CSS components
 
 ```html
-<link rel="stylesheet" href="tutorial/semantic_components/popup.min.CSS">
-<link rel="stylesheet" href="tutorial/semantic_components/transition.min.CSS">
+<link rel="stylesheet" href="./tutorialjs/semantic_components/popup.min.css">
+<link rel="stylesheet" href="./tutorialjs/semantic_components/transition.min.css">
 ```
 
 Add Semantic UI Scripts
 
 ```html
-<script src="tutorial/semantic_components/transition.min.js"></script>
-<script src="tutorial/semantic_components/popup.min.js"></script>
+<script src="./tutorialjs/semantic_components/transition.min.js"></script>
+<script src="./tutorialjs/semantic_components/popup.min.js"></script>
 ```
 
 Include **Tutorialjs** script
 
 ```html
-<script src="tutorial/tutorial.js"></script>
+<script src="./tutorialjs/tutorial.js"></script>
 ```
 
 #### Optional
@@ -54,7 +54,7 @@ Include **Tutorialjs** script
 If you want to use Semantic UI button styles you can add the following:
 
 ```html
-<link rel="stylesheet" href="tutorial/semantic_components/button.min.CSS">
+<link rel="stylesheet" href="./tutorialjs/semantic_components/button.min.css">
 ```
 
 
