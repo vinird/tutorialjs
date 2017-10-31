@@ -14,7 +14,7 @@ This library is based on [Semantic UI elements](https://semantic-ui.com/) and us
 
 ## How to contribute
 
-***This project is in alpha version (0.1.0).**
+***This project is in alpha version (0.1.3).**
 
 You can contribute following the contribution guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
 Also check [issues](https://github.com/vinird/tutorialjs/issues) to start contributing to this project.
@@ -159,7 +159,7 @@ Tutorial.start().then((success) => {
 | Name                         | Accepted values                                         | Description                                                                                                                   | Default                     |
 | :--------------------------: | :-----------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------- | :-------------------------: |
 | **startIndex**               | `int`                                                   | Start index point.                                                                                                            | 0                           |
-| **endIndex**                 | `int`                                                   | End index point.                                                                                                              | the largest index                         |
+| **endIndex**                 | `int`                                                   | End index point.                                                                                                              | The largest index                         |
 | **selector**                 | JQuery selector                                         | Selector, example:  `".className"` `".intro,.demo"`  `"[href='default.htm']"`.                                                | `".tutorial"`               |
 | **onlyOnce**                 | `true` `false`                                          | It uses the current URL to determinate if the tutorial was already ran. And sets cookies to evaluate it next time it runs.    | `false`                     |
 | **styles**                   | `true` `false`                                          | Applies custom styles to the container of each step.                                                                          | ``true``                    |
@@ -170,7 +170,7 @@ Tutorial.start().then((success) => {
 | **btnFinishClass**           | `string`                                                | Set the custom classes for the finish button.                                                                                 | ``"ui button tiny basic"``  |
 | **btnNextText**              | `string`                                                | Set the text for the next button.                                                                                             | ``"Next"``                  |
 | **btnNextClass**             | `string`                                                | Set the custom classes for the next button.                                                                                   | ``"ui button tiny primary`` |
-| **dimmer**                   | `boolean`                                                | Set to false to prevent rest of components from dimming | true|
+| **dimmer**                   | `boolean`                                                | Set to false to prevent rest of components from dimming | `true`|
 
 
 ## License ![MIT](https://img.shields.io/apm/l/vim-mode.svg)
