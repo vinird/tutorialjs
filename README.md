@@ -170,7 +170,7 @@ Tutorial.start().then((success) => {
 | **btnFinishClass**           | `string`                                                | Set the custom classes for the finish button.                                                                                 | ``"ui button tiny basic"``  |
 | **btnNextText**              | `string`                                                | Set the text for the next button.                                                                                             | ``"Next"``                  |
 | **btnNextClass**             | `string`                                                | Set the custom classes for the next button.                                                                                   | ``"ui button tiny primary`` |
-
+| **dimmer**                   | `boolean`                                                | Set to false to prevent rest of components from dimming | true|
 
 
 ## License ![MIT](https://img.shields.io/apm/l/vim-mode.svg)
