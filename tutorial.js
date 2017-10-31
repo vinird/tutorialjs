@@ -1,7 +1,7 @@
 
 /*
 * Date         Version     Modified By                  Description
-* 2017-10-24   0.1.0       vinird (GitHub user)         Alpha release
+* 2017-10-24   0.1.3       vinird (GitHub user)         Alpha release
 */
 
 var Tutorial = {
@@ -22,6 +22,8 @@ var Tutorial = {
     btnNextText: 'Next', // Next button text
     btnNextClass: 'ui button tiny primary', // Next button CSS class
     
+    dimmer: true,
+
     // Do not override!
     tutorialCount: -999, // Init the tutorial popups steps count
     scrollSelector: null, // Jquery scroll selector (body or html)
@@ -204,12 +206,14 @@ var Tutorial = {
     * Create the HTML dimmer with inline styles 
     */
     createDimmer: () => {
-        $(document).ready(()=>{
-            if($('.tutorial_dimmer')[0] == undefined) {
-                let element = '<div style="margin: 0px; padding: 0px; background: #000; opacity: 0; height: 100%; width: 100%; z-index: 999; top: -100%; position: fixed; overflow: hidden;" class="tutorial_dimmer"></div>';
-                $("html").append(element);
-            }
-        });
+        if(Tutorial.dimmer) {
+            $(document).ready(()=>{
+                if($('.tutorial_dimmer')[0] == undefined) {
+                    let element = '<div style="margin: 0px; padding: 0px; background: #000; opacity: 0; height: 100%; width: 100%; z-index: 999; top: -100%; position: fixed; overflow: hidden;" class="tutorial_dimmer"></div>';
+                    $("html").append(element);
+                }
+            });
+        }
     },
 
     /*
@@ -302,17 +306,21 @@ var Tutorial = {
     * Shows custom dimmer
     */
     showDimmer: () => {
-        $('.tutorial_dimmer').css('top','0');
-        $('.tutorial_dimmer').animate({opacity: 0.4});
+        if(Tutorial.dimmer) {
+            $('.tutorial_dimmer').css('top','0');
+            $('.tutorial_dimmer').animate({opacity: 0.4});
+        }
     },
 
     /*
     * Hides custom dimmer
     */
     hideDimmer: () => {
-        $('.tutorial_dimmer').animate({opacity: 0},()=>{
-            $('.tutorial_dimmer').css('top','-100%');
-        });
+        if(Tutorial.dimmer) {
+            $('.tutorial_dimmer').animate({opacity: 0},()=>{
+                $('.tutorial_dimmer').css('top','-100%');
+            });
+        }
     },
 
     /*
