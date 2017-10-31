@@ -48,8 +48,8 @@ var Tutorial = {
         // Initialize the tutorial count every time
         Tutorial.tutorialCount = 0;
 
-        // Set thi last index
-        $('.tutorial').each(function() {
+        // Set this last index
+        $(Tutorial.selector).each(function() {
             var index = parseFloat($(this).attr('tutorial-index'));
             if (index > Tutorial.endIndex) {Tutorial.endIndex = index};
         })
@@ -286,7 +286,12 @@ var Tutorial = {
     * Finish tutorials and resolve the Promise with 'cancelled' message
     */
     finishTutorial: (element) => {
-        Tutorial.resolve('canceled') // Promise success
+        // if this element is the last one, resolves with 'finished' message
+        if (Tutorial.tutorialCount - 1 == Tutorial.endIndex) {
+          Tutorial.resolve('finished');
+        } else {
+          Tutorial.resolve('canceled');
+        }
         let popupName = $(element).attr('tutotrial-val');
         $(popupName).popup('hide')
         Tutorial.sanitizeZindex(true);
