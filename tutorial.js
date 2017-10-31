@@ -1,13 +1,13 @@
 
 /*
 * Date         Version     Modified By                  Description
-* 2017-10-24   0.1.0       vinird (GitHub user)         Alpha release
+* 2017-10-24   0.1.3       vinird (GitHub user)         Alpha release
 */
 
 var Tutorial = {
     // GLOBALS
     startIndex: 0, // Start point
-    endIndex: 999, // The final point of index
+    endIndex: 0, // End point
     selector: '.tutorial', // Jquery selector
     onlyOnce: false, // It is used to evaluate if the tutorial only runs onces (it uses cookies)
     styles: true, // It adds custom styles to the each container
@@ -23,8 +23,7 @@ var Tutorial = {
     btnNextClass: 'ui button tiny primary', // Next button CSS class
     
     dimmer: true,
-    
-    
+
     // Do not override!
     tutorialCount: -999, // Init the tutorial popups steps count
     scrollSelector: null, // Jquery scroll selector (body or html)
@@ -47,10 +46,18 @@ var Tutorial = {
         } else {
             Tutorial.scrollSelector = 'html';            
         }
+
+        // Initialize the tutorial count every time
+        Tutorial.tutorialCount = 0;
+
+        // Set this last index
+        $(Tutorial.selector).each(function() {
+            var index = parseFloat($(this).attr('tutorial-index'));
+            if (index > Tutorial.endIndex) {Tutorial.endIndex = index};
+        })
+
         // Tutorial.styles          = styles;
         // Tutorial.selector        = selector; // JQuery selector
-        // Tutorial.tutorialCount   = startIndex; // Initialize the tutorial count every time
-        // Tutorial.endIndex        = endIndex; // Set the last index
         // Tutorial.onlyOnce        = onlyOnce;
         return new Promise((resolve, reject) => 
             {
@@ -166,7 +173,7 @@ var Tutorial = {
     * Check if the index meet the endIndex
     */
     checkEndIndex: () => {
-        if(Tutorial.endIndex == Tutorial.tutorialCount) {
+        if(Tutorial.endIndex < Tutorial.tutorialCount) {
             Tutorial.sanitizeZindex();
             Tutorial.tutorialCount = -999;
             Tutorial.resolve("outOfIndex"); // Promise success
@@ -220,11 +227,16 @@ var Tutorial = {
         Tutorial.sanitizeZindex();
         let title = $(Tutorial.selector +'[ tutorial-index='+count+']').attr('tutorial-title') // Popup title
         let text = $(Tutorial.selector +'[ tutorial-index='+count+']').attr('tutorial-text') // Popup body text
-        return ''+ // Returns the popup HTML
+        // Set popup html for all the tutorial elements
+        let popUpHtml =
             '<strong>' + title + '</strong>'+
             '<p> ' + text + '</p>'+
-            '<button class="'+Tutorial.btnFinishClass+'" tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" count="'+count+'" onclick="Tutorial.finishTutorial(this)">'+Tutorial.btnFinishText+'</button>'+
-            '<button tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" class="'+Tutorial.btnNextClass+'" onclick="Tutorial.closePopup(this, '+count+')">'+Tutorial.btnNextText+'</button>';
+            '<button class="'+Tutorial.btnFinishClass+'" tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" count="'+count+'" onclick="Tutorial.finishTutorial(this)">'+Tutorial.btnFinishText+'</button>';
+        // If this tutorial element is not the last one, then add next button
+        if (Tutorial.endIndex != Tutorial.tutorialCount) {
+          popUpHtml += '<button tutotrial-val="'+Tutorial.selector +'[ tutorial-index='+count+']'+'" class="'+Tutorial.btnNextClass+'" onclick="Tutorial.closePopup(this, '+count+')">'+Tutorial.btnNextText+'</button>';
+        }
+        return popUpHtml;
     },
 
     /*
@@ -278,7 +290,12 @@ var Tutorial = {
     * Finish tutorials and resolve the Promise with 'cancelled' message
     */
     finishTutorial: (element) => {
-        Tutorial.resolve('canceled') // Promise success
+        // if this element is the last one, resolves with 'finished' message
+        if (Tutorial.tutorialCount - 1 == Tutorial.endIndex) {
+          Tutorial.resolve('finished');
+        } else {
+          Tutorial.resolve('canceled');
+        }
         let popupName = $(element).attr('tutotrial-val');
         $(popupName).popup('hide')
         Tutorial.sanitizeZindex(true);
