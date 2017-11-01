@@ -17,10 +17,10 @@ var Tutorial = {
     btnFramework: 'semantic', // Set which framework is used to give styles to buttons
     
     btnFinishText: 'Finish', // Finish button text
-    btnFinishClass: 'ui button tiny basic', // Finish button CSS class
+    btnFinishClass: 'ui button small basic', // Finish button CSS class
     
     btnNextText: 'Next', // Next button text
-    btnNextClass: 'ui button tiny primary', // Next button CSS class
+    btnNextClass: 'ui button small primary', // Next button CSS class
     
     dimmer: true,
 
@@ -85,8 +85,8 @@ var Tutorial = {
             Tutorial.btnFinishClass = 'waves-effect btn';
             Tutorial.btnNextClass = 'waves-effect waves-light btn';
         } else {
-            Tutorial.btnFinishClass = 'ui button tiny basic';
-            Tutorial.btnNextClass = 'ui button tiny primary';
+            Tutorial.btnFinishClass = 'ui button small basic';
+            Tutorial.btnNextClass = 'ui button small primary';
         }
     },
 
