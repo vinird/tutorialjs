@@ -1,7 +1,7 @@
 
 /*
 * Date         Version     Modified By                  Description
-* 2017-10-24   0.1.3       vinird (GitHub user)         Alpha release
+* 2017-10-24   0.1.4       vinird (GitHub user)         Alpha release
 */
 
 var Tutorial = {
