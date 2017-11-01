@@ -14,7 +14,7 @@ This library is based on [Semantic UI elements](https://semantic-ui.com/) and us
 
 ## How to contribute
 
-***This project is in alpha version (0.1.3).**
+***This project is in alpha version (0.1.4).**
 
 You can contribute following the contribution guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
 Also check [issues](https://github.com/vinird/tutorialjs/issues) to start contributing to this project.
