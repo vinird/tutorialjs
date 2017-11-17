@@ -1,6 +1,7 @@
 <p align="center"><img src="assets/images/logo/tutorialjs-logo.png"></p>
 
-# Tutorialjs ![status alpha](https://img.shields.io/badge/status-alpha-yellow.svg)
+# Tutorialjs ![status alpha](https://img.shields.io/badge/status-alpha-yellow.svg) 
+### [Check how it works in this video! (YouTube)](https://www.youtube.com/watch?v=o_1PAFCr2Lg)
 
 ![Watch the gif](assets/example/example.gif)
 
